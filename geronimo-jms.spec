@@ -6,7 +6,7 @@
 
 Name:		%{?scl_prefix}%{pkg_name}
 Version:	1.1.1
-Release:	19.11%{?dist}
+Release:	19.12%{?dist}
 Summary:	J2EE JMS v1.1 API
 
 License:	ASL 2.0
@@ -20,8 +20,8 @@ BuildArch:	noarch
 
 # This pulls in almost all of the required java and maven stuff
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:	maven30-geronimo-parent-poms
-BuildRequires:	maven30-maven-resources-plugin
+BuildRequires:	%{?scl_prefix}geronimo-parent-poms
+BuildRequires:	%{?scl_prefix}maven-resources-plugin
 
 # Ensure a smooth transition from geronimo-specs
 
@@ -39,13 +39,13 @@ Summary:	API documentation for %{pkg_name}
 
 %prep
 %setup -q -n %{spec_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch0 -p1
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_file  : %{pkg_name} %{spec_name} jms
 %mvn_alias : javax.jms:jms
@@ -53,7 +53,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE.txt NOTICE.txt
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.1.1-19.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.1.1-19.11
 - maven33 rebuild
 
