@@ -6,7 +6,7 @@
 
 Name:		%{?scl_prefix}%{pkg_name}
 Version:	1.1.1
-Release:	19.12%{?dist}
+Release:	19.13%{?dist}
 Summary:	J2EE JMS v1.1 API
 
 License:	ASL 2.0
@@ -19,7 +19,7 @@ Patch0:		geronimo-jms-1.1-api-remove-mockobjects.patch
 BuildArch:	noarch
 
 # This pulls in almost all of the required java and maven stuff
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:	%{?scl_prefix}geronimo-parent-poms
 BuildRequires:	%{?scl_prefix}maven-resources-plugin
 
@@ -65,6 +65,9 @@ set -e -x
 %doc LICENSE.txt NOTICE.txt
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.1.1-19.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.1.1-19.12
 - maven33 rebuild #2
 
